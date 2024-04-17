@@ -1,0 +1,433 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, sans-serif;
+    list-style: none;
+    text-decoration: none;
+    outline: none;
+    border: none;
+}
+
+:root {
+    --mainColor: #007bff;
+    --secondColor: #0263ca;
+    --charcoalColor: #343a40;
+    --pastelBlueColor: #cce5ff;
+    --lightAzureColor: #b8daff;
+}
+
+body {
+    background: var(--mainColor);
+    height: 100vh;
+}
+
+.start-btn,
+.info-box,
+.quiz-box,
+.result-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2), 0px 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+button.restart {
+    color: white;
+    background-color: var(--mainColor);
+
+    &:hover {
+        background-color: var(--secondColor);
+
+    }
+}
+
+button.quit {
+    color: var(--mainColor);
+
+    &:hover {
+        color: white;
+        background-color: var(--mainColor);
+    }
+}
+
+
+
+/* Start Quiz Button */
+.start-btn button {
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--mainColor);
+    padding: 15px 30px;
+
+    border: none;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+}
+
+/* End Quiz Button */
+
+
+/* Start Info Box */
+.info-box {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 540px;
+    background-color: white;
+    border-radius: 5px;
+    transition: .3s ease;
+
+    .info-title {
+        height: 60px;
+        width: 100%;
+        border-bottom: 1px solid lightgrey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 35px;
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .info-list {
+        text-transform: capitalize;
+        padding: 15px 35px;
+
+        .info {
+            margin: 5px 0;
+            font-size: 17px;
+
+            span {
+                font-weight: 600;
+                color: var(--mainColor);
+            }
+        }
+
+    }
+
+    .buttons {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0 35px;
+        border-top: 1px solid lightgray;
+
+        button {
+            margin: 0 5px;
+            height: 40px;
+            width: 100px;
+            border: 1px solid var(--mainColor);
+            border-radius: 5px;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+    }
+}
+
+/* End Info Box */
+
+
+/* Start Quiz Box  */
+.quiz-box {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 550px;
+    background-color: white;
+    border-radius: 5px;
+    transition: 0.3s ease;
+
+    header {
+        position: relative;
+        z-index: 77;
+        height: 70px;
+        padding: 0 30px;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 5px 5px 0 0;
+        box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.1);
+
+        .title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .timer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 145px;
+            height: 45px;
+            background-color: var(--pastelBlueColor);
+            border: 1px solid var(--lightAzureColor);
+            border-radius: 5px;
+            padding: 0 8px;
+
+            .time-text {
+                font-weight: 400;
+                font-size: 17px;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            .timer-sec {
+                font-size: 18px;
+                font-weight: 500;
+                background-color: var(--charcoalColor);
+                height: 30px;
+                width: 45px;
+                color: white;
+                text-align: center;
+                line-height: 30px;
+                border-radius: 5px;
+                border: 1px solid var(--charcoalColor);
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+
+        }
+    }
+
+    section {
+        padding: 25px 30px 20px 30px;
+        background-color: white;
+
+        .que-text {
+            font-size: 25px;
+            font-weight: 600;
+        }
+
+        .option-list {
+            padding: 20px 0;
+            display: block;
+
+            .option {
+                background-color: aliceblue;
+                border: 1px solid #84c5fe;
+                border-radius: 5px;
+                padding: 4px;
+                margin-bottom: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                cursor: pointer;
+                font-size: 17px;
+                transition: 0.3s ease;
+
+                &:has(.icon.tick) {
+                    border-color: #23903c;
+                    color: #239023;
+                    background-color: #d4edda;
+                }
+
+                &:has(.icon.cross) {
+                    color: #a42834;
+                    background-color: #f8d7da;
+                    border-color: #a4383a;
+                }
+
+                &:hover {
+                    color: #004085;
+                    background-color: var(--pastelBlueColor);
+                    border-color: var(--lightAzureColor);
+                }
+
+                &:active {
+                    color: #004085;
+                    background-color: var(--pastelBlueColor) I !important;
+                    border-color: var(--lightAzureColor) !important;
+                }
+
+                &:last-child {
+                    margin-bottom: 0px;
+                }
+
+                .icon {
+                    height: 26px;
+                    width: 26px;
+                    border: 2px solid transparent;
+                    border-radius: 50%;
+                    font-size: 13px;
+                    pointer-events: none;
+                    text-align: center;
+                    line-height: 24px;
+
+                    &.tick {
+                        border-color: #23903c;
+                        color: #239023;
+                        background-color: #d4edda;
+                    }
+
+                    &.cross {
+                        color: #a42834;
+                        background-color: #f8d7da;
+                        border-color: #a4383a;
+                    }
+                }
+            }
+        }
+    }
+
+    footer {
+        height: 60px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 30px;
+
+        .total-que {
+
+            span {
+                display: flex;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+
+                p {
+                    font-weight: 500;
+                    padding: 0 5px;
+
+                    &:first-child {
+                        padding-left: 0px;
+                    }
+                }
+            }
+        }
+
+        .next-btn {
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0.9);
+            height: 40px;
+            padding: 0 13px;
+            font-size: 18px;
+            font-weight: 400;
+            border: none;
+
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 1px solid var(--mainColor);
+            background: var(--mainColor);
+            transition: .3s ease;
+
+            &:hover {
+                background-color: var(--secondColor);
+            }
+        }
+    }
+}
+
+
+
+/* End Quiz Box  */
+
+/* Start Result Box */
+.result-box {
+    background-color: white;
+    width: 450px;
+    padding: 25px 30px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.9);
+
+    .icon {
+        font-size: 100px;
+        color: var(--mainColor);
+        margin-bottom: 10px;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            width: 80%;
+            border-radius: 5px;
+            height: 12px;
+            background-color: var(--mainColor);
+            bottom: 12%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    .complete-text {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .score-text span {
+        display: flex;
+        margin: 10px 0;
+        font-size: 18px;
+        font-weight: 500;
+
+        p {
+            font-weight: 600;
+            padding: 0 4px;
+        }
+
+    }
+
+    .buttons {
+        display: flex;
+        margin: 20px 0;
+        gap: 20px;
+
+        button {
+            height: 40px;
+            padding: 0 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            font-weight: 500;
+            border: 1px solid var(--mainColor);
+            cursor: pointer;
+            transition: .3s ease;
+        }
+    }
+}
+
+/* End Result Box */
+
+.show {
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+    pointer-events: auto !important;
+}
+
+@media (max-width:580px) {
+
+    .quiz-box,
+    .info-box {
+        width: 322px;
+    }
+
+    button.show {
+        position: absolute;
+        right: -40px;
+        bottom: -10px;
+    }
+}

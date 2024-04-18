@@ -159,6 +159,7 @@ button.quit {
         justify-content: space-between;
         border-radius: 5px 5px 0 0;
         box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
 
         .progress {
             transition: .3s linear;
@@ -215,6 +216,27 @@ button.quit {
             }
 
 
+        }
+
+        .x {
+            position: absolute;
+            width: 25px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            right: 0px;
+            top: 0px;
+            border-bottom-left-radius: 5px;
+            cursor: pointer;
+            color: gray;
+            background-color: #eee;
+            transition: .3s ease;
+
+            &:hover {
+                background-color: red;
+                color: white;
+            }
         }
     }
 
@@ -370,6 +392,7 @@ button.quit {
     opacity: 0;
     pointer-events: none;
     transform: translate(-50%, -50%) scale(0.9);
+    transition: .3s;
 
     .icon {
         font-size: 100px;

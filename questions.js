@@ -1,4 +1,4 @@
-const questions = [
+let questions = [
   {
     title: "Why We Use &lt; br&gt;  Element",
     answer_1: "To Make Text Bold",

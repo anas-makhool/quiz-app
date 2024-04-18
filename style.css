@@ -305,6 +305,8 @@ button.quit {
         justify-content: space-between;
         align-items: center;
         padding: 0 30px;
+        min-height: 60px;
+
 
         .total-que {
 
@@ -398,6 +400,8 @@ button.quit {
         margin: 10px 0;
         font-size: 18px;
         font-weight: 500;
+        flex-wrap: wrap;
+        justify-content: center;
 
         p {
             font-weight: 600;
@@ -435,7 +439,8 @@ button.quit {
 @media (max-width:580px) {
 
     .quiz-box,
-    .info-box {
+    .info-box,
+    .result-box {
         width: 322px;
     }
 
@@ -444,8 +449,17 @@ button.quit {
         right: -40px;
         bottom: -10px;
     }
+
+    .result-box button {
+        font-size: 14px !important;
+        padding: 10px !important;
+    }
 }
 
 .event-none {
     pointer-events: none;
+}
+
+.dis-none {
+    display: none !important;
 }

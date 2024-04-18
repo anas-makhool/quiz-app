@@ -1,14 +1,27 @@
 const startBtn = document.querySelector(".start-btn button");
 const infoBox = document.querySelector(".info-box");
 const quizBox = document.querySelector(".quiz-box");
+const resultBox = document.querySelector(".result-box");
 const nextBtn = document.querySelector(".next-btn");
+const resultText = document.querySelector(".score-text");
+const resultP1 = resultText.children[0].firstElementChild;
+const resultP2 = resultText.children[0].lastElementChild;
 const timerSec = document.querySelector(".timer-sec");
 const progress = document.querySelector(".progress");
-
+const total = document.querySelector(".total-que");
+const totalP1 = total.children[0].firstElementChild;
+const totalP2 = total.children[0].lastElementChild;
+const parentFooter = document.querySelector(".parent");
+console.log(resultText);
+const rightEffect = document.createElement("div");
+rightEffect.innerHTML = `<div class="icon tick"><i class="fas fa-check"></i></div>`;
+const wrongEffect = rightEffect.cloneNode(false);
+wrongEffect.innerHTML = `<div class="icon cross"><i class="fas fa-times"></i></div>`;
 let currentIndex = 0;
 let score = 0;
-let startProg = 0;
-let interval;
+let timeValue = 15;
+// let startProg = 0;
+let counter;
 
 const addRem_show = function (check, ele) {
   if (check) {
@@ -61,15 +74,8 @@ const startQue = function () {
   quizBox.querySelector("section").innerHTML = quizBlock;
 
   quizBox.querySelectorAll(".option").forEach((ele) => {
-    // Create rightEffect
-    const rightEffect = document.createElement("div");
-    rightEffect.innerHTML = `<div class="icon tick"><i class="fas fa-check"></i></div>`;
-
-    // Create wrongEffect
-    const wrongEffect = rightEffect.cloneNode(false);
-    wrongEffect.innerHTML = `<div class="icon cross"><i class="fas fa-times"></i></div>`;
-
     ele.onclick = () => {
+      clearInterval(counter);
       addRem_event(true, ele.parentElement);
       const chosenAnswer = ele.querySelector(".option span").innerHTML;
 
@@ -90,13 +96,46 @@ const startQue = function () {
   });
 };
 
-infoBox.querySelector(".restart").onclick = () => startQue();
+infoBox.querySelector(".restart").onclick = () => {
+  startQue();
+  startTimer(timeValue);
+};
 
-nextBtn.onclick = () => {
-  if (currentIndex === questions.length - 1) return;
+nextBtn.onclick = function () {
+  if (currentIndex === questions.length - 1) {
+    console.log(`score: ` + score);
+    addRem_show(false, quizBox);
+    addRem_show(true, resultBox);
+    resultP1.innerHTML = score;
+    resultP2.innerHTML = questions.length;
+    return;
+  }
   currentIndex++;
   console.log("currentIndex: " + currentIndex);
-  console.log(`score: ` + score);
+  totalP1.innerHTML = currentIndex + 1;
+  totalP2.innerHTML = questions.length;
   startQue();
+  clearInterval(counter);
+  startTimer(timeValue);
   addRem_show(false, nextBtn);
 };
+
+function startTimer(time) {
+  counter = setInterval(timer, 10);
+  function timer() {
+    timerSec.textContent = time;
+    time--;
+
+    if (time < 0) {
+      quizBox.querySelectorAll(".option").forEach((ele) => {
+        if (
+          ele.querySelector(".option span").innerHTML ===
+          questions[currentIndex].right_answer
+        ) {
+          score--;
+          ele.click();
+        }
+      });
+    }
+  }
+}
